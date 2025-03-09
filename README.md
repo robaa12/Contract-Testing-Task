@@ -23,7 +23,7 @@ This project demonstrates contract testing between microservices using Keploy. I
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/keploy-contract-testing.git
+   git clone https://github.com/robaa12/keploy-contract-testing.git
    cd keploy-contract-testing
    ```
 
@@ -44,7 +44,7 @@ This project uses Keploy for contract testing between the microservices. The con
 To run contract tests:
 
 ```bash
-keploy test -c ./keploy.yml
+keploy contract test 
 ```
 
 ## Services and Dependencies
