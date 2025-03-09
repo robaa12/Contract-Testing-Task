@@ -1,0 +1,123 @@
+services:
+  # User Service and its database
+  user-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: user_service
+    ports:
+      - "5432:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  user-service:
+    container_name: user-service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    depends_on:
+      user-db:
+        condition: service_healthy
+    environment:
+      DB_HOST: user-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: user_service
+      DB_SSL_MODE: disable
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./user-service/keploy:/app/keploy
+
+  # Order service and its database
+  order-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: order_service
+    ports:
+      - "5433:5432"
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  order-service:
+    container_name: order-service
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    depends_on:
+      order-db:
+        condition: service_healthy
+    environment:
+      DB_HOST: order-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: order_service
+      DB_SSL_MODE: disable
+      USER_SERVICE_URL: http://user-service:8080
+      PORT: 8081
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./order-service/keploy:/app/keploy
+  # Payment service and its database
+  payment-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: payment_service
+    ports:
+      - "5434:5432"
+    volumes:
+      - payment_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  payment-service:
+    container_name: payment-service
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
+    depends_on:
+      payment-db:
+        condition: service_healthy
+    environment:
+      DB_HOST: payment-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: payment_service
+      DB_SSL_MODE: disable
+      STRIPE_SECRET_KEY: "sk_test_51QzteqEN3C714OAm8VzfJjb8fvGZAUGsBmEX8kRjINodFu7GcS37P1xhPxo5R1hW5KhJmuF7FILqNd6PJmOsDXIz00MycXH7lk"
+      PORT: 8082
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./payment-service/keploy:/app/keploy
+
+volumes:
+  user_db_data:
+  order_db_data:
+  payment_db_data:

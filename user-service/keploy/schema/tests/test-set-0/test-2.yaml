@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+    title: test-2
+    version: api.keploy.io/v1beta1
+    description: Http
+servers:
+    - url: localhost:8080
+paths:
+    /api/users/eacd32c1-5f24-4153-b268-cf4355a8978b:
+        get:
+            summary: Auto-generated operation
+            description: Auto-generated from custom format
+            parameters:
+                - name: Accept-Encoding
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: gzip
+                - name: Host
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: localhost:8080
+                - name: User-Agent
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: Go-http-client/1.1
+            operationId: d6f398d4ac5dc569530c2782ae2ae62f-20250309091320
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    address:
+                                        type: string
+                                    created_at:
+                                        type: string
+                                    email:
+                                        type: string
+                                    id:
+                                        type: string
+                                    name:
+                                        type: string
+                                    updated_at:
+                                        type: string
+                            example:
+                                address: 123 Main St, Cityville
+                                created_at: "2025-03-07T02:56:45.515866Z"
+                                email: johndoe@example.com
+                                id: eacd32c1-5f24-4153-b268-cf4355a8978b
+                                name: John Doe
+                                updated_at: "2025-03-07T02:56:45.515866Z"
+components: {}

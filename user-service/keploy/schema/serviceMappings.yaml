@@ -1,0 +1,5 @@
+servicesMapping:
+    order-service:
+        - /api/users
+        - /api/users/:id
+self: user-service

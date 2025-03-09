@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+    title: test-2
+    version: api.keploy.io/v1beta1
+    description: Http
+servers:
+    - url: localhost:8081
+paths:
+    /api/orders/25d0d256-dab2-4b50-9da2-4c2e4d52962a:
+        get:
+            summary: Auto-generated operation
+            description: Auto-generated from custom format
+            parameters:
+                - name: Accept
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: '*/*'
+                - name: Host
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: localhost:8081
+                - name: User-Agent
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                  example: curl/8.9.1
+            operationId: 5b30303f0165e4d4003b135b634aee42-20250309091207
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    created_at:
+                                        type: string
+                                    id:
+                                        type: string
+                                    products:
+                                        items:
+                                            properties:
+                                                id:
+                                                    type: string
+                                                name:
+                                                    type: string
+                                                price:
+                                                    type: number
+                                                quantity:
+                                                    type: number
+                                            type: object
+                                        type: array
+                                    status:
+                                        type: string
+                                    total_amount:
+                                        type: number
+                                    updated_at:
+                                        type: string
+                                    user_email:
+                                        type: string
+                                    user_id:
+                                        type: string
+                                    user_name:
+                                        type: string
+                            example:
+                                created_at: "2025-03-09T08:11:14.496106Z"
+                                id: 25d0d256-dab2-4b50-9da2-4c2e4d52962a
+                                products:
+                                    - id: eacd32c1-5f24-4153-b268-cf4355a8978b
+                                      name: Smartphone
+                                      price: 799.99
+                                      quantity: 1
+                                    - id: prod-002
+                                      name: Wireless Headphones
+                                      price: 149.99
+                                      quantity: 2
+                                status: pending
+                                total_amount: 1099.97
+                                updated_at: "2025-03-09T08:11:14.496106Z"
+                                user_email: johndoe@example.com
+                                user_id: eacd32c1-5f24-4153-b268-cf4355a8978b
+                                user_name: John Doe
+components: {}
